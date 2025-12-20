@@ -79,6 +79,7 @@ top_n = int((st.session_state.target_pct / 100) * len(impact_df))
 target_customers = impact_df.head(top_n)
 estimated_saved_revenue = (target_customers["Revenue at Risk"].sum() * (st.session_state.retention_rate/100))
 st.metric("Estimated Monthly Revenue Recovered", f"₹{estimated_saved_revenue:,.0f}")
+st.caption(f"Revenue estimates are based on MonthlyCharges as an approximation and assume a {int(st.session_state.retention_rate)}% retention (campaign success) rate among targeted customers.")
 
 st.subheader("Risk Segment Summary")
 
@@ -86,4 +87,3 @@ st.dataframe(
     data = impact_summary,
     width = "stretch"
 )
-st.caption(f"Revenue estimates are based on MonthlyCharges as a proxy and assume a {int(st.session_state.retention_rate)}% retention (campaign success) rate among targeted customers.")
