@@ -24,7 +24,7 @@ The objective of this project is to:
 3. <code>pickle</code>:- For storing Python objects.
 
 # Third-Party Libraries
-1. <code>imblearn</code>:- For <code>SMOTE</code> oversampling.
+1. <code>imblearn</code>:- For <code>SMOTE</code> oversampling and pipeline.
 2. <code>joblib</code>:- For storing trained models.
 3. <code>pandas</code> and <code>numpy</code>:- For working with datasets and csv files.
 4. <code>matplotlib</code> and <code>plotly</code>:- For dataset visualization and graphs.
