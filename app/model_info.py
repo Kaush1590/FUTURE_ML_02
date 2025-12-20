@@ -260,7 +260,7 @@ with precision_recall_prauc_tab:
         st.toast("Download Started")
 
 with threshold_stimulation_tab:
-    st.header("Decision Threshold Simulator")
+    st.header("Threshold vs Metrics")
     st.caption("Adjust the probability threshold to observe changes in precision, recall, and error trade-offs.")
 
     precision = precision_recall_prauc[0]
