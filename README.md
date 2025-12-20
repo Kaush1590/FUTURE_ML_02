@@ -100,6 +100,8 @@ Once started, open the URL displayed in the terminal to access the application.
 
 ### Dataset Overview Dashboard
 ![Dataset](screenshots/dataset_overview.png)
+![EDA](screenshots/eda.png)
 
 ### Model Performance Dashboard
 ![Model Metrics](screenshots/model_overview.png)
+![ThresholdvsMetrics](screenshots/thresholdvsmetrics.png)
