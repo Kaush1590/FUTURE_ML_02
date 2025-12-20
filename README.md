@@ -105,3 +105,7 @@ Once started, open the URL displayed in the terminal to access the application.
 ### Model Performance Dashboard
 ![Model Metrics](screenshots/model_overview.png)
 ![ThresholdvsMetrics](screenshots/thresholdvsmetrics.png)
+
+### Business Impact and Retention Analysis
+![Business Impact](screenshots/business_impact.png)
+![Retention Campaign Stimulation](screenshots/retention_campaign_stimulation.png)
