@@ -108,5 +108,4 @@ Once started, open the URL displayed in the terminal to access the application.
 
 ### Business Impact and Retention Analysis
 ![Business Impact](screenshots/business_impact.png)
-![Customer Distribution](screenshots/customer_dist_churn_risk.png)
 ![Retention Campaign Stimulation](screenshots/retention_campaign_stimulation.png)
