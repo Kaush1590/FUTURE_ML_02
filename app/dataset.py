@@ -65,7 +65,6 @@ summary = pd.DataFrame({
 })
 
 page_title = "Overview of the dataset"
-
 st.set_page_config(
     page_title = page_title,
     page_icon = "📋",
