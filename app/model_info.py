@@ -44,7 +44,7 @@ except Exception as e:
 page_title = "Overview of the model"
 st.set_page_config(
     page_title = page_title,
-    page_icon = "🤖",
+    page_icon = "💻",
     layout = "wide"
 )
 st.sidebar.header(page_title)

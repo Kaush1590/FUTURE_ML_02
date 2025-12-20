@@ -2,6 +2,7 @@ import joblib
 import pandas as pd
 import pathlib
 import pickle
+from session_init import init_history
 import streamlit as st
 
 @st.cache_data
@@ -40,15 +41,25 @@ def option_field (label, options, key):
         horizontal = True
     )
 
+def save_history(history_path, df):
+    df.to_csv(history_path, index = False)
+
 try:
     encoder_path = pathlib.Path(__file__).parent.parent / "model" / "encoder_dump.pkl"
     model_path = pathlib.Path(__file__).parent.parent / "model" / "model_dump.joblib"
     state_path = pathlib.Path(__file__).parent.parent / "model" / "state_dump.pkl"
+    history_path = init_history()
     encoders = load_state(encoder_path)
     state_holder = load_state(state_path)
     model = joblib.load(model_path)
     df = state_holder["dataframe"]
     features = state_holder["feature_list"].drop("Churn", errors = "ignore")
+    if "history_df" not in st.session_state:
+        if history_path.exists():
+            st.session_state.history_df = pd.read_csv(history_path)
+        else:
+            st.session_state.history_df = pd.DataFrame()
+
 except FileNotFoundError as e:
     st.error(f"Required files not found in the project. Please generate the files from notebook before proceeding.")
     st.stop()
@@ -115,6 +126,24 @@ with tab1:
         else:
             st.session_state.predict = "No Churn"
             st.session_state.predict_proba = 1 - churn_prob
+
+        history_row = pd.DataFrame([{
+            "customerID": st.session_state.customerID,
+            **{col: st.session_state[col] for col in feature_columns},
+            "Prediction": st.session_state.predict,
+            "Prediction Probability": round(st.session_state.predict_proba, 3),
+            "Threshold": st.session_state.threshold,
+            "Timestamp": pd.Timestamp.now()
+        }])
+        st.session_state.history_df = pd.concat(
+            [st.session_state.history_df, history_row],
+            ignore_index = True
+        )
+        st.session_state.history_df.drop_duplicates(
+            subset = ["customerID", "Timestamp"],
+            inplace = True
+        )
+        save_history(history_path = history_path, df = st.session_state.history_df)
             
     st.divider()
     c1, c2 = st.columns(2)
