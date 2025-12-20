@@ -30,3 +30,7 @@ The models are trained on <a href="https://www.kaggle.com/datasets/blastchar/tel
 3. Utilizes <code>RandomizedSearchCV</code> for hyperparameter optimization.
 4. Provides interactive dashboards and in-depth exploratory analysis and model performance evaluation.
 5. Maintains prediction and model evaluation history for analysis and comparison.
+
+## Installation
+<b>Follow the steps below to set up the project locally.</b>
+### 1. Clone the repository
