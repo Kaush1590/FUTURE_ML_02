@@ -88,3 +88,18 @@ Once started, open the URL displayed in the terminal to access the application.
 ## Acknowledgment
 1. Kaggle for providing dataset
 2. Open-source Python community
+
+## Application Screenshots
+
+### Churn Prediction Dashboard
+![Dashboard](screenshots/mainpage.png)
+
+### History Dashboard
+![History](screenshots/history.png)
+![Stats](screenshots/prediction_records.png)
+
+### Dataset Overview Dashboard
+![Dataset](screenshots/dataset_overview.png)
+
+### Model Performance Dashboard
+![Model Metrics](screenshots/model_overview.png)
