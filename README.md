@@ -73,6 +73,9 @@ streamlit run app.py
 ```
 Once started, open the URL displayed in the terminal to access the application.
 
+## Model Retraining
+To retrain the model using a different classification algorithm, modify the training notebook to select the desired model and re-execute the notebook. The updated model and related artifacts will be generated and can be used by the application without further code changes.
+
 ## Application Modules
 1. Dataset Overview: Data summary, missing values, outliers, distributions
 2. EDA Dashboard: Correlation heatmap, box plots, histograms
