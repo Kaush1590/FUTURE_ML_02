@@ -1,8 +1,9 @@
 ## Churn Prediction System:
-<b>A machine learning application for predicting customer churn using historical behavioral and transactional data.</b>
+**A machine learning application for predicting customer churn using historical behavioral and transactional data.**
+
 The system provides churn probability scores at the customer level, supports both single and bulk predictions, and includes interactive dashboards for data exploration, model evaluation, and business decision support. It is designed to help organizations identify at-risk customers and optimize retention strategies.
 
-The models are trained using the <a href="https://www.kaggle.com/datasets/blastchar/telco-customer-churn">Telecom Customer Churn</a> dataset.
+**The models are trained using the <a href="https://www.kaggle.com/datasets/blastchar/telco-customer-churn">Telecom Customer Churn</a> dataset.**
 
 ## Problem Statement
 Customer churn leads to significant revenue loss and increased customer acquisition costs.
@@ -39,8 +40,13 @@ The objective of this project is to:
 4. Provides interactive dashboards and in-depth exploratory analysis for model performance evaluation.
 5. Maintains prediction and model evaluation history for analysis and comparison.
 
+## Model Retraining
+To retrain the model using a different classification algorithm, modify the training notebook to select the desired model and re-execute the notebook. The updated model and related artifacts will be generated and can be used by the application without further code changes.
+
+**If multiple classification models are evaluated during retraining, the system automatically selects and persists the model with the best cross-validation ROC-AUC score as the final model.**
+
 ## Installation
-<b>Follow the steps below to set up the project locally.</b>
+**Follow the steps below to set up the project locally.**
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/Kaush1590/FUTURE_ML_02.git
@@ -73,14 +79,11 @@ streamlit run app.py
 ```
 Once started, open the URL displayed in the terminal to access the application.
 
-## Model Retraining
-To retrain the model using a different classification algorithm, modify the training notebook to select the desired model and re-execute the notebook. The updated model and related artifacts will be generated and can be used by the application without further code changes.
-
 ## Application Modules
-1. Dataset Overview: Data summary, missing values, outliers, distributions
-2. EDA Dashboard: Correlation heatmap, box plots, histograms
-3. Model Information: Metrics, ROC-AUC, PR-AUC, confusion matrix
-4. Prediction Module: Single input and bulk input CSV predictions
+1. **Dataset Overview:** Data summary, missing values, outliers, distributions
+2. **EDA Dashboard:** Correlation heatmap, box plots, histograms
+3. **Model Information:** Metrics, ROC-AUC, PR-AUC, confusion matrix
+4. **Prediction Module:** Single input and bulk input CSV predictions
 
 ## Business Value
 1. Early identification of churn-prone customers.
