@@ -6,11 +6,13 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
+# For loading application state
 @st.cache_data
 def load_state(path):
     with open(path, "rb") as f:
         return pickle.load(f)
 
+# Provides download button for interactive plotly graphs
 def download_button(fig, filename, key):
     buffer = io.StringIO()
     fig.write_html(buffer)
@@ -22,25 +24,29 @@ def download_button(fig, filename, key):
         key = key
     )
 
+# Load application states
 try:
     state_path = pathlib.Path(__file__).parent.parent / "model" / "state_dump.pkl"
     state_holder = load_state(state_path)
+
+    # Extract model hyperparameters and evaluation outputs
     parameters = pd.DataFrame.from_dict(state_holder["model_parameters"], orient = "index").astype("str")
     classification_report = state_holder["model_classification_report"]
     confusion_matrix = state_holder["model_confusion_matrix"]
     fpr_tpr_auc = state_holder["model_fpr_tpr_auc"]
     precision_recall_prauc = state_holder["model_precision_recall_prauc"]
-    feature_importance_plot = state_holder["model_feature_importance"]
     cv_scores = pd.DataFrame.from_dict(state_holder["model_cv_scores"], orient = "index")
     metrics = pd.DataFrame.from_dict(state_holder["model_metrics"], orient = "index")
     feature_df = state_holder["feature_importance_dataframe"]
+
 except FileNotFoundError as e:
-    st.error(f"Required files not found in the project. Please generate the files from notebook before proceeding.")
+    st.error(f"Required files not found in the project. Please generate the files by running training notebook before proceeding.")
     st.stop()
 except Exception as e:
     st.error(f"Errors encountered while starting project: {e}")
     st.stop()
-    
+
+# Page configuration
 page_title = "Overview of the model"
 st.set_page_config(
     page_title = page_title,
@@ -48,9 +54,11 @@ st.set_page_config(
     layout = "wide"
 )
 st.sidebar.header(page_title)
+
 st.title("Model Information")
 st.metric("Model Name", state_holder["model_name"])
 
+# Performance summary
 with st.expander("Show model performance summary"):
     left, right = st.columns(2)
 
@@ -59,7 +67,7 @@ with st.expander("Show model performance summary"):
 
     left.download_button(
         label = "Download preformance metrics summary",
-        data = metrics.to_csv(index=False),
+        data = metrics.to_csv(index = False),
         file_name = "performance_scores.csv",
         mime = "text/csv"
     )
@@ -69,18 +77,20 @@ with st.expander("Show model performance summary"):
 
     right.download_button(
         label = "Download cross validation metrics summary",
-        data = cv_scores.to_csv(index=False),
+        data = cv_scores.to_csv(index = False),
         file_name = "cross_validation_scores.csv",
         mime = "text/csv"
     )
 
-(parameter_tab, 
-classification_report_tab, 
-confusion_matrix_tab, 
-fpr_tpr_auc_tab, 
-precision_recall_prauc_tab,
-threshold_stimulation_tab,
-feature_importance_tab, 
+# Model analysis dashboard
+(
+    parameter_tab, 
+    classification_report_tab, 
+    confusion_matrix_tab, 
+    fpr_tpr_auc_tab, 
+    precision_recall_prauc_tab,
+    threshold_simulation_tab,
+    feature_importance_tab, 
 ) = st.tabs(
     ["Model Parameters",
     "Classification Report",
@@ -95,6 +105,7 @@ feature_importance_tab,
 with parameter_tab:
     st.header("Model hyperparameters")
     st.caption("Hover on top-right of the table to see options.")
+    
     st.dataframe(
         data = parameters,
         width = 'stretch'
@@ -116,7 +127,7 @@ with confusion_matrix_tab:
     fig = px.imshow(
         confusion_matrix,
         text_auto = True,
-        color_continuous_scale="Blues",
+        color_continuous_scale = "Blues",
         aspect = "auto",
         labels = dict (x = "Predicted", y = "Actual")
     )
@@ -259,9 +270,9 @@ with precision_recall_prauc_tab:
     if st.session_state[key]:
         st.toast("Download Started")
 
-with threshold_stimulation_tab:
+with threshold_simulation_tab:
     st.header("Threshold vs Metrics")
-    st.caption("Adjust the probability threshold to observe changes in precision, recall, and error trade-offs.")
+    st.caption("This illustrates how precision and recall vary with different decision thresholds.")
 
     precision = precision_recall_prauc[0]
     recall = precision_recall_prauc[1]
@@ -270,11 +281,11 @@ with threshold_stimulation_tab:
     tpr = fpr_tpr_auc[1]
 
     st.slider(
-        "Select decision threshold",
-        min_value=float(thresholds.min()),
-        max_value=float(thresholds.max()),
-        value=0.5,
-        step=0.01,
+        label = "Select decision threshold",
+        min_value = float(thresholds.min()),
+        max_value = float(thresholds.max()),
+        value = 0.5,
+        step = 0.01,
         key = "threshold_slider"
     )
 
@@ -304,8 +315,8 @@ with feature_importance_tab:
     )
 
     fig.update_traces(
-        texttemplate="%{text:.3f}",
-        textposition="outside"
+        texttemplate = "%{text:.3f}",
+        textposition = "outside"
     )
 
     st.plotly_chart(
