@@ -1,4 +1,4 @@
-## Churn Prediction System:
+## Churn Prediction System
 **A machine learning application for predicting customer churn using historical behavioral and transactional data.**
 
 The system provides churn probability scores at the customer level, supports both single and bulk predictions, and includes interactive dashboards for data exploration, model evaluation, and business decision support. It is designed to help organizations identify at-risk customers and optimize retention strategies.
@@ -13,11 +13,11 @@ The objective of this project is to:
 2. Quantify churn risk using probability scores
 3. Enable data-driven retention decisions
 
-## System Requirements:
+## System Requirements
 1. Operating System: Windows / Linux / macOS
 2. Python version: 3.9+
 
-## Dependencies:
+## Dependencies
 
 # Standard Python Libraries
 1. <code>logging</code>:- For logging processes.
